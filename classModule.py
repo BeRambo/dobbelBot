@@ -104,6 +104,9 @@ class Game:
     self.highScore.resetScore()
     self.drawPlayers = []
 
+  def reset(self):
+    self = self.__init__()
+
   def setHighScore(self, Player):
     if self.highScore.name != '': #keeps the tries if the score is improved
       Player.tries = copy.copy(self.highScore.tries)

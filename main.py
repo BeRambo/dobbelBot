@@ -42,14 +42,13 @@ async def join(ctx):
 
 @bot.command()
 async def gooi(ctx):
-  if game.started:
-    if game.checkActive(ctx.author.id): #checks if this is the active player
-      worp.shake()
-      for dobbelsteen in worp.throwArray: #stuur foto van dobbelsteen
-        image = discord.File('img/' + str(dobbelsteen) + '.png')
-        await ctx.send(file=image)
+  if game.checkActive(ctx.author.id): #checks if this is the active player
+    worp.shake()
+    for dobbelsteen in worp.throwArray: #stuur foto van dobbelsteen
+      image = discord.File('img/' + str(dobbelsteen) + '.png')
+      await ctx.send(file=image)
 
-      await ctx.send(worp.printThrow())
+    await ctx.send(worp.printThrow())
 
 
 @bot.command()
@@ -146,6 +145,8 @@ async def start(ctx):
     await ctx.send("######################################" )
     await ctx.send(f"En de verliezer van deze ronde is {game.participants[-1].name}, 3 slokken voor u!" )
     await ctx.send("######################################" )
+
+  game.reset()
 
 @bot.command()
 async def stop(ctx):
