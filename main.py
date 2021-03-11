@@ -45,7 +45,7 @@ async def gooi(ctx):
   if game.checkActive(ctx.author.id): #checks if this is the active player
     worp.shake()
     for dobbelsteen in worp.throwArray: #stuur foto van dobbelsteen
-      image = discord.File('img/' + str(dobbelsteen) + '.png')
+      image = discord.File("img/" + str(dobbelsteen) + ".png")
       await ctx.send(file=image)
 
     await ctx.send(worp.printThrow())
@@ -128,7 +128,7 @@ async def start(ctx):
         #waits for throwone
         await bot.wait_for("message", check=checkGooiEen)
         drawThrow = Dice().roll() 
-        image = discord.File('img/' + str(drawThrow) + '.png')
+        image = discord.File("img/" + str(drawThrow) + ".png")
         await ctx.send(file=image)
         player.drawScore = drawThrow #saves the drawScore in the player (in drawPlayers)
         player.active = False
