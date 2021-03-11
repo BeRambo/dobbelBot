@@ -21,29 +21,32 @@ If there is a tie game, the players with the equal highscore need to throw just 
 
 ## Scores ##
 The scores are determinded pretty easily:
----------------
-|Dice | Score |
-|-------------|
-|  1  |  100  |
-|  2  |   2   |
-|  3  |   3   |
-|  4  |   4   |
-|  5  |   5   |
-|  6  |  60   |
----------------
 
-Score ranking:
-Zand van 1   (1,1,1)
-Soixant-neuf (4,5,6)
-Zand van 2   (2,2,2)
-Zand van 3   (3,3,3)
-Zand van 4   (4,4,4)
-Zand van 5   (5,5,5)
-Zand van 6   (6,6,6)
-260          (1,1,6)
-220          (1,6,6)
-...
-7            (2,2,3) Bottoms up, this is the lowest score you can throw! You can not throw again.
+Dice|Score 
+-----|--------
+  1  |  100  
+  2  |   2   
+  3  |   3   
+  4  |   4   
+  5  |   5   
+  6  |  60   
+
+
+## Score ranking: ##
+N* | Score name | Dices
+--| ---------- | ------
+1 | Zand van 1 |  (1,1,1)
+2 | Soixant-neuf (69) | (4,5,6)
+3 | Zand van 2  | (2,2,2)
+4 | Zand van 3  | (3,3,3)
+5 | Zand van 4  | (4,4,4)
+6 | Zand van 5  | (5,5,5)
+7 | Zand van 6  | (6,6,6)
+8 | 260         | (1,1,6)
+9 | 220         | (1,6,6)
+10 | 205        | (1,1,5)
+.. | ...        | (X,X,X)
+lowest | 7      | (2,2,3) Bottoms up! You can not throw again.
 
 
 ## Stopping the game ##
