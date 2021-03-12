@@ -35,7 +35,7 @@ async def join(ctx):
     player = Player(ctx.author)
     game.addPlayer(player)
     await ctx.send("{} is toegevoegd aan de lijst met spelers!".format(player.name))
-    game.showPlayers() #debug option
+    #game.showPlayers() #debug option
   else:
     await ctx.send("Er is nog een spel bezig, je kan pas meedoen bij een nieuw spel.")
 
@@ -68,8 +68,9 @@ async def start(ctx):
   def checkGooiEen(m):
     return m.content == "$gooiEen" and m.channel == ctx.channel and m.author.id == game.getActivePlayer(True).discriminator
   def checkAnswer(m):
-    msgContent = m.content[0].lower()
-    return msgContent == "j" and m.author.id == game.getActivePlayer().discriminator or msgContent == "n" and m.channel == ctx.channel and m.author.id == game.getActivePlayer().discriminator
+    if m.author.id == game.getActivePlayer().discriminator  and m.channel == ctx.channel:
+      msgContent = m.content[0].lower()
+      return msgContent == "j"  or msgContent == "n" 
 
 
   while game.started and len(game.participants) >= 1:
@@ -91,7 +92,7 @@ async def start(ctx):
 
         score = worp.score #haalt score op bij gooi fuc 
         player.setScore(Score(player.name, player.discriminator, score, i)) #slaat score op in player
-        print("Players score: " + str(player.score)) #debug option
+        #print("Players score: " + str(player.score)) #debug option
 
         if score == 7: #bij 7 mag je niet opnieuw
             break
@@ -145,6 +146,23 @@ async def start(ctx):
     await ctx.send("######################################" )
     await ctx.send(f"En de verliezer van deze ronde is {game.participants[-1].name}, 3 slokken voor u!" )
     await ctx.send("######################################" )
+
+    if not game.started: 
+      winners = game.getGameWinners()
+      gameWinner = winners[0]
+      await ctx.send(f"Jullie speelden {str(game.roundsPlayed)} rondes. ")
+      
+      if winners[0].roundsWon != winners[1].roundsWon:
+        await ctx.send(f"{gameWinner.name} won het meeste rondes! Hij / zij won er {str(gameWinner.roundsWon)}!")
+      else:
+        await ctx.send("Er zijn meerdere winnaars, maar degene die het zatste is wint altijd!")
+
+      await ctx.send("######################################" )
+      for player in winners:
+        await ctx.send(f"{player.name}: {str(player.roundsWon)} rondes gewonnen")
+
+      await ctx.send("Bedankt voor het spelen, de kluute!" )
+      await ctx.send("######################################" )
 
   game.reset()
 
