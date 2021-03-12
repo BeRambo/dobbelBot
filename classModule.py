@@ -9,10 +9,14 @@ class Player:
     self.tries = 0
     self.drawScore = 0
     self.active = False
+    self.roundsWon = 0
 
   def setScore(self, Score):
     self.score = Score.score
     self.tries = Score.tries
+
+  def roundWinner(self):
+    self.roundsWon += 1
 
 
 class Score:
@@ -129,12 +133,18 @@ class Game:
 
     winnerPos = self.retrievePosition(id)
     self.rotatePlayers(winnerPos)
+    self.participants[0].roundWinner() #adds 1 to his roundsWon
 
   def removeDrawPlayers(self): #removes all players with a lower draw score then the highest
     highestThrow = self.drawPlayers[0].drawScore
     for player in self.drawPlayers:
       if player.drawScore < highestThrow:
         self.drawPlayers.remove(player)
+
+  def getGameWinners(self):
+    gameWinners = sorted(self.participants, key=lambda x: x.roundsWon, reverse=True)
+    return gameWinners
+
 
 
 class Dice:
